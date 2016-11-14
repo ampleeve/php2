@@ -56,7 +56,7 @@
         "Описание продукта",
         ["ключевое слово продукта 1", "ключевое слово продукта 2"]
     );
-    $product -> view();
+    $product->view();
 
     class Toy extends Product {
 
@@ -80,8 +80,8 @@
          */
         public function __construct($id, $name, $img, $price, $description, $keywords, $age, $type){
             parent::__construct($id, $name, $img, $price, $description, $keywords);
-            $this -> age = $age;
-            $this -> type = $type;
+            $this->age = $age;
+            $this->type = $type;
         }
 
         public function view(){
@@ -103,7 +103,7 @@
         3,
         "Плюшевая игрушка"
     );
-    $toy -> view();
+    $toy->view();
 
     class Car extends Product {
         /**
@@ -126,8 +126,8 @@
          */
         public function __construct($id, $name, $img, $price, $description, $keywords, $color, $brandName){
             parent::__construct($id, $name, $img, $price, $description, $keywords);
-            $this -> color = $color;
-            $this -> brandName = $brandName;
+            $this->color = $color;
+            $this->brandName = $brandName;
         }
 
         public function view(){
@@ -146,7 +146,7 @@
         "Красный",
         "BMW"
     );
-    $car -> view();
+    $car->view();
 
 /*
     5. Дан код
