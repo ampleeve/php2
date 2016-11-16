@@ -46,6 +46,7 @@
                 echo "<p>$aKeyword</p>";
             }
         }
+        
     }
 
     $product = new Product(
