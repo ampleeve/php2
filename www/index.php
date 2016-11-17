@@ -1,107 +1,78 @@
 <?php
-/*abstract class Product {
-    
-    abstract protected function getValue();
-    public function printValue() {
-
-        print $this->getValue() . "\n";
-    }
-}*/
 
 
-abstract class Product{
-    /**
-     * @var $id int - идентификатор продукта
-     * @var $name string - Название продукта
-     * @var $img array - Адреса изображений
-     * @var $price int - Цена продажи
-     * @var $description string - Описание продукта
-     * @var $keywords array - Ключевые слова
-     */
-    public $id;
+abstract class Product {
+
     public $name;
-    public $img;
-    public $price;
-    public $description;
-    public $keywords;
 
-    /**
-     * Product constructor.
-     * @param $id
-     * @param $name
-     * @param $img
-     * @param $price
-     * @param $description
-     * @param $keywords
-     */
-    public function __construct($id, $name, $img, $price, $description, $keywords){
-        $this->id = $id;
+    // определяем правило, что у каждого продукта должна подсчитываться стоимость итоговая
+    abstract public function getCostProduct();
+}
+
+class Elbooks extends Product  {
+
+    public $costForItem;
+    public $count;
+
+    public function __construct($name, $costForItem, $count){
         $this->name = $name;
-        $this->img = $img;
-        $this->price = $price;
-        $this->description = $description;
-        $this->keywords = $keywords;
+        $this->costForItem = $costForItem;
+        $this->count = $count;
     }
 
-    abstract protected function showProduct();
+    // переопределяем абстрактный метод подсчета стоимости
 
-    public function view(){
-
-        echo "<h1>$this->name</h1>";
-        echo "Изображения: ";
-        foreach ($this->img as $img) {
-            echo "<p>$img</p>";
-        }
-        echo "<p>Цена: $this->price</p>";
-        echo "<p>Описание товара: $this->description</p>";
-        echo "Ключевые слова: ";
-        foreach ($this->keywords as $aKeyword) {
-            echo "<p>$aKeyword</p>";
-        }
-        $this->showProduct();
-    }
-
-}
-class Toy extends Product {
-
-    /**
-     * @var $age int - Ограничение по возрасту
-     * @var $type string - Тип игрушки
-     */
-    public $age;
-    public $type;
-
-    /**
-     * Toy constructor.
-     * @param $id
-     * @param $name
-     * @param $img
-     * @param $price
-     * @param $description
-     * @param $keywords
-     * @param $age
-     * @param $type
-     */
-    public function __construct($id, $name, $img, $price, $description, $keywords, $age, $type){
-        parent::__construct($id, $name, $img, $price, $description, $keywords);
-        $this->age = $age;
-        $this->type = $type;
-    }
-
-    protected function showProduct(){
-       /* parent::view();
-        echo "<p>Ограничение по возрасту(лет): $this->age</p>";
-        echo "<p>Тип игрушки: $this->type</p>";*/
-
-    }
-
-
-}
-/*class ChildClass extends MyAbstractClass {
-
-    protected function getValue() {
-        return " ChildClass ";
+    public function getCostProduct() {
+        return $this->costForItem * $this->count;
     }
 }
-$class1 = new ChildClass();
-$class1->printValue();*/
+
+class Toy extends Product  {
+
+    public $costForItem;
+
+    public function __construct($name, $costForItem){
+        $this->name = $name;
+        $this->costForItem = $costForItem;
+    }
+
+    // переопределяем абстрактный метод подсчета стоимости
+
+    public function getCostProduct() {
+        return $this->costForItem;
+    }
+}
+
+class Food extends Product  {
+
+    public $costForKilogram;
+    public $weight;
+
+    public function __construct($name, $costForKilogram, $weight){
+        $this->name = $name;
+        $this->costForKilogram = $costForKilogram;
+        $this->weight = $weight;
+    }
+
+    // переопределяем абстрактный метод подсчета стоимости
+
+    public function getCostProduct() {
+        return $this->costForKilogram * $this->weight;
+    }
+}
+
+
+// наполняем массив products объектами
+$products[] = new Elbooks("Электронная книга, набор 2 шт", 300, 2);
+$products[] = new Toy("Плюшевый заяц", 150);
+$products[] = new Food("Творог", 100, 0.2);
+
+foreach ($products as $product) {
+    if ($product instanceof Product) { // Если мы работаем с наследниками Product
+        $cost = $product->getCostProduct();
+        echo "$product->name - итоговая цена: $cost <br>";
+    }
+    else {
+        echo "объект не является наследником класса Product";
+    }
+}
