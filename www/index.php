@@ -1,6 +1,8 @@
 <?php
-abstract class MyAbstractClass {
+abstract class Product {
 
+    public $id;
+    
     abstract protected function getValue();
     public function printValue() {
 
