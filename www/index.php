@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
 <?php
 
 
@@ -76,3 +83,11 @@ foreach ($products as $product) {
         echo "объект не является наследником класса Product";
     }
 }
+?>
+<!--<a href="./tr.php">Трейты</a><br>
+<a href="singleton.php">Синглтон</a><br> -->
+<a href="singletonThroughTraits.php">Синглтон через трейты</a>
+</body>
+</html>
+
+
