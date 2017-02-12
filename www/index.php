@@ -37,7 +37,7 @@
             echo "<h1>$this->name</h1>";
             echo "Изображения: ";
             foreach ($this->img as $img){
-                echo "<p>$img</p>";
+                echo "$img<br/>";
             }
             echo "<p>Цена: $this->price</p>";
             echo "<p>Описание товара: $this->description</p>";
